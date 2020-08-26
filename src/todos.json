@@ -2,37 +2,31 @@
   {
     "userId": 1,
     "id": 1,
-    "title": "Work on todo part 1",
-    "completed": true
+    "title": "Become Batman",
+    "completed": false
   },
   {
     "userId": 1,
     "id": 2,
-    "title": "quis ut nam facilis et officia qui",
+    "title": "Discover Cold Fusion",
     "completed": false
   },
   {
     "userId": 1,
     "id": 3,
-    "title": "fugiat veniam minus",
-    "completed": false
-  },
-  {
-    "userId": 1,
-    "id": 4,
-    "title": "et porro tempora",
+    "title": "Eat some tacos",
     "completed": true
   },
   {
     "userId": 1,
-    "id": 5,
-    "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
+    "id": 4,
+    "title": "Discover Alien Life",
     "completed": false
   },
   {
     "userId": 1,
-    "id": 6,
-    "title": "laboriosam mollitia et enim quasi adipisci quia provident illum",
-    "completed": false
+    "id": 5,
+    "title": "Make up random todos",
+    "completed": true
   }
 ]

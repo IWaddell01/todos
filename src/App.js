@@ -70,10 +70,7 @@ class App extends Component {
     this.setState({ todos: deleteCompleted})
    }
 
-   handleActiveLeft() {
 
-     
-   }
 
 
   render() {
