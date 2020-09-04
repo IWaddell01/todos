@@ -1,4 +1,4 @@
-import {todosList as initialTodos} from "../todos";
+import { todosList as initialTodos } from "../todos";
 import { ADD_TODO } from "./../actions/todosActions";
 import { v4 as uuid } from "uuid";
 
