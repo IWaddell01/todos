@@ -11,8 +11,6 @@ export default function TodoList(props) {
 						key={todo.id}
 						title={todo.title}
 						completed={todo.completed}
-						handleCheck={props.handleCheck}
-						handleDelete={props.handleDelete}
 						id={todo.id}
 					/>
 				))}

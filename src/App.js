@@ -2,54 +2,21 @@ import React, { useState } from "react";
 import { todosList } from "./todos";
 import { Switch, Route, NavLink } from "react-router-dom";
 import TodoList from "./components/TodoList/TodoList";
-import { v4 as uuid } from "uuid";
 import { connect } from "react-redux";
+import { addTodo, clearCompletedTodos } from "./actions/actions";
 
 // Followed Kano's Todo Demo videos to convert
 // from class to functional with hooks
 
 function App(props) {
-	const [todos, setTodos] = useState(todosList);
 	const [inputText, setInputText] = useState("");
 
 	const handleAddToDo = (e) => {
 		e.preventDefault();
-		const newId = uuid();
-		const newTodo = {
-			userId: 1,
-			id: newId,
-			title: inputText,
-			completed: false,
-		};
-		const newTodos = {
-			...todos,
-		};
-		newTodos[newId] = newTodo;
-		setTodos(newTodos);
+		props.addTodo(inputText);
 		setInputText("");
 	};
 
-	const handleCheck = (id) => {
-		const newTodos = { ...todos };
-		newTodos[id].completed = !newTodos[id].completed;
-		setTodos(newTodos);
-	};
-
-	const handleDelete = (id) => {
-		const newTodos = { ...todos };
-		delete newTodos[id];
-		setTodos(newTodos);
-	};
-
-	const handleClear = () => {
-		const newTodos = { ...todos };
-		for (const todo in newTodos) {
-			if (newTodos[todo].completed) {
-				delete newTodos[todo];
-			}
-		}
-		setTodos(newTodos);
-	};
 
 	return (
 		<section className="todoapp">
@@ -67,33 +34,28 @@ function App(props) {
 			</header>
 			<Switch>
 				<Route exact path="/">
-					<TodoList
-						todos={Object.values(props.todos)}
-						handleCheck={handleCheck}
-						handleDelete={handleDelete}
-					/>
+					<TodoList todos={Object.values(props.todos)} />
 				</Route>
 
 				<Route exact path="/completed">
 					<TodoList
 						todos={Object.values(props.todos).filter((todo) => todo.completed)}
-						handleCheck={handleCheck}
-						handleDelete={handleDelete}
 					/>
 				</Route>
 
 				<Route exact path="/active">
 					<TodoList
 						todos={Object.values(props.todos).filter((todo) => !todo.completed)}
-						handleCheck={handleCheck}
-						handleDelete={handleDelete}
 					/>
 				</Route>
 			</Switch>
 			<footer className="footer">
 				{/* <!-- This should be `0 items left` by default --> */}
 				<span className="todo-count">
-					<strong>{Object.values(todos).filter((todo) => !todo.completed).length}</strong> item(s) left
+					<strong>
+						{Object.values(props.todos).filter((todo) => !todo.completed).length}
+					</strong>{" "}
+					item(s) left
 				</span>
 				<ul className="filters">
 					<li>
@@ -112,7 +74,7 @@ function App(props) {
 						</NavLink>
 					</li>
 				</ul>
-				<button className="clear-completed" onClick={() => handleClear()}>
+				<button className="clear-completed" onClick={() => props.clear_Completed_Todos()}>
 					Clear completed
 				</button>
 			</footer>
@@ -123,4 +85,10 @@ function App(props) {
 const mapStateToProps = (state) => ({
 	todos: state.todos,
 });
-export default connect(mapStateToProps)(App);
+
+const mapDispatchToProps = (dispatch) => ({
+	addTodo: (inputText) => dispatch(addTodo(inputText)),
+	clear_Completed_Todos: () => dispatch(clearCompletedTodos()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
