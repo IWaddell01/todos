@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { todosList } from "./todos";
 import { Switch, Route, NavLink } from "react-router-dom";
 import TodoList from "./components/TodoList/TodoList";
 import { connect } from "react-redux";
